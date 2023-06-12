@@ -1,1 +1,19 @@
-<h1>Hello, world!</h1>
+<%= simple_form_for :flight, method: :get, url: '/flights' do |f| %>
+  <%= f.input :departure_airport_id, collection: @airport_options %>
+  <%= f.input :arrival_airport_id, collection: @airport_options %>
+  <%= f.input :passanger_count, collection: 1..4 %>
+  <!--<%= debug @departure_times %>-->
+  <%= f.input :departure_time, collection: @departure_times, label_method: :flight_time_formatted, value_method: :departure_time %>
+  <%= f.button :submit %>
+<% end %>
+
+<hr>
+<h2>Available Flights</h2>
+<% @flights.each do |flight| %>
+  <div>
+    From:<%= Airport.find(id=flight.departure_airport_id).code %> <br \>
+    To:<%= Airport.find(id=flight.arrival_airport_id).code %> <br \>
+    At: <%= flight.departure_time %>
+  </div>
+  <br \>
+<% end %>

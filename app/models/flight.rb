@@ -4,4 +4,8 @@ class Flight < ApplicationRecord
 
   belongs_to :departure_airport, :class_name => 'Airport'
   belongs_to :arrival_airport, :class_name => 'Airport'
+
+  def flight_time_formatted
+    departure_time.strftime("%d/%m/%y %H:%M")
+  end
 end
