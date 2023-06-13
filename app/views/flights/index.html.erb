@@ -8,12 +8,21 @@
 <% end %>
 
 <hr>
-<h2>Available Flights</h2>
-<% @flights.each do |flight| %>
-  <div>
-    From:<%= Airport.find(id=flight.departure_airport_id).code %> <br \>
-    To:<%= Airport.find(id=flight.arrival_airport_id).code %> <br \>
-    At: <%= flight.departure_time %>
-  </div>
-  <br \>
+
+<!--
+
+-->
+
+
+<% unless @flights.nil? %>
+  <% unless @flights.empty? %>
+    <h2>Available Flights</h2>
+    <%= simple_form_for :booking, method: :get, url: '/flights' do |f| %>
+      <%= f.input :flight, collection: @flights, as: :radio_buttons, label_method: :flight_info %>
+      <%= f.button :submit %>
+    <% end %>
+  <% else %>
+    <h2>No flights match parameters</h2>
+  <% end %>
+
 <% end %>
