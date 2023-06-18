@@ -34,3 +34,14 @@ flights = Flight.create([
   { departure_airport_id: 5, arrival_airport_id: 4, departure_time: DateTime.new(2023, 07, 05, 18, 18, 00), duration: "1:20:00"},
   { departure_airport_id: 6, arrival_airport_id: 1, departure_time: DateTime.new(2023, 06, 14, 8, 9, 00), duration: "3:05:00"}
 ])
+
+bookings = Booking.create([
+  { flight_id: 1 },
+  { flight_id: 2 }
+])
+
+passengers = Passenger.create([
+  { name: "Alex Herr", email: "AlexHerr@gmail.com", booking_id: 1},
+  { name: "Bethany Gil", email: "ThatBethany@gmail.com", booking_id: 1},
+  { name: "Oleg Rye", email: "123OlegOleg321@gmail.com", booking_id: 2}
+])
