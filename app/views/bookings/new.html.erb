@@ -1,0 +1,24 @@
+<h1>Almost there, just a few extra steps</h1>
+
+<h2>Flight info</h2>
+<%= Flight.find(id=params[:booking][:flight_id]).flight_info %>
+
+<h2>Passenger info:</h2>
+
+<%= simple_form_for @booking do |form| %>
+
+  <%= form.hidden_field :flight_id, value: params[:booking][:flight_id] %>
+
+  <% params[:booking][:passenger_count].to_i.times do %>
+    <%= form.fields_for :passengers, @booking.passengers.build do |passengers_form| %>
+      <%= passengers_form.label :name %>
+      <%= passengers_form.text_field :name, placeholder: 'Passenger Name' %> <br \>
+      <%= passengers_form.label :email %>
+      <%= passengers_form.text_field :email, placeholder: 'Passenger Email' %>
+      <hr>
+    <% end %>
+  <% end %>
+
+  <%= form.button :submit %>
+
+<% end %>

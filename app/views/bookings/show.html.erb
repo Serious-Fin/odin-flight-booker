@@ -1,0 +1,9 @@
+<h1>Thank you for your purchase</h1>
+<h2>Flight info</h2>
+<%= Booking.find(id=params[:id]).flight.flight_info %>
+
+<h2>Passenger info</h2>
+<% Booking.find(id=params[:id]).passengers.each do |passenger| %>
+  <%= passenger.passenger_info %>
+  <br />
+<% end %>

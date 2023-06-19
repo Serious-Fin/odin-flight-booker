@@ -1,7 +1,7 @@
 <%= simple_form_for :flight, method: :get, url: '/flights' do |f| %>
   <%= f.input :departure_airport_id, collection: @airport_options %>
   <%= f.input :arrival_airport_id, collection: @airport_options %>
-  <%= f.input :passanger_count, collection: 1..4 %>
+  <%= f.input :passenger_count, collection: 1..4 %>
   <!--<%= debug @departure_times %>-->
   <%= f.input :departure_time, collection: @departure_times, label_method: :flight_time_formatted, value_method: :departure_time %>
   <%= f.button :submit %>
@@ -17,8 +17,9 @@
 <% unless @flights.nil? %>
   <% unless @flights.empty? %>
     <h2>Available Flights</h2>
-    <%= simple_form_for :booking, method: :get, url: '/flights' do |f| %>
-      <%= f.input :flight, collection: @flights, as: :radio_buttons, label_method: :flight_info %>
+    <%= simple_form_for :booking, method: :get, url: '/bookings/new' do |f| %>
+      <%= f.input :flight_id, collection: @flights, as: :radio_buttons %>
+      <%= f.input :passenger_count, :as => :hidden, input_html: { value: @passenger_count.nil? ? '1' : @passenger_count } %>
       <%= f.button :submit %>
     <% end %>
   <% else %>
